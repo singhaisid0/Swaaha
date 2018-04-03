@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      {% load static %}
+      <meta charset="utf-8">
+      <title>Swaaha | Admin Panel</title>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <style>
+    .space{
+      margin-top: 10vh;
+    }
+    </style>
+    <body>
+      <!-- Navbar -->
+      <div class="navbar-fixed">
+       <nav>
+         <div class="nav-wrapper green accent-4">
+            <a data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" class="brand-logo center hide-on-large-only"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+            <a href="#" class="brand-logo left hide-on-med-and-down"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+           <ul class="right hide-on-med-and-down">
+             <li><a href="{% url 'logout' %}">Logout</a></li>
+           </ul>
+         </div>
+       </nav>
+     </div>
+     <ul id="slide-out" class="side-nav">
+       <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+
+    <!-- content -->
+    <div class="container">
+      <h5>Hello, {{ username }}!</h5>
+      <p class="green-text">Dashboard > <p/>
+      <div class="space"></div>
+      <div class="row">
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{ admins_num }}</span>
+              <p>Admins</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'adminsInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{ customers_num }}</span>
+              <p>Customers</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'customersInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{ operators_num }}</span>
+              <p>Operators</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'operatorsInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{ drivers_num }}</span>
+              <p>Drivers</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'driversInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{ clusters_num }}</span>
+              <p>Clusters</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'clustersInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Waste Collection</span>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'wasteInfo' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="card green accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Operator's Waste</span>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'checmical' %}" class="white-text">More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--scripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+    $( document ).ready(function(){
+      $(".button-collapse").sideNav();
+    })
+    </script>
+    </body>
+  </html>

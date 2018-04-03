@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Waste Collection</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+.space{
+  margin-top: 10vh;
+}
+</style>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+     <nav>
+       <div class="nav-wrapper green accent-4">
+          <a data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo center hide-on-large-only"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+          <a href="#" class="brand-logo left hide-on-med-and-down"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+         <ul class="right hide-on-med-and-down">
+           <li><a href="{% url 'logout' %}">Logout</a></li>
+         </ul>
+       </div>
+     </nav>
+   </div>
+   <ul id="slide-out" class="side-nav">
+     <li><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+  <div class="space"></div>
+  <div class="container">
+    <p class="green-text">Dashboard > Waste Collection > Filter Customer > Month-wise<p/>
+      <a href="{% url 'downloadFilterMonth' %}" class="waves-effect waves-light btn green accent-4 white-text">Download</a>
+    <table class="highlight table-responsive">
+        <thead>
+          <tr>
+              <th>Cluster</th>
+              <th>Driver</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Customer</th>
+              <th>Weight</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for key, value in data.items %}
+              {% for k, v in value.items %}
+                {% if v.customer == username %}
+                  <tr>
+                    <td>{{ v.cluster }}</td>
+                    <td>{{ v.driverEmail }}</td>
+                    <td>{{ key }}</td>
+                    <td>{{ k }}</td>
+                    <td>{{ v.customer }}</td>
+                    <td>{{ v.weight }}</td>
+                  </tr>
+                  {% endif %}
+              {% endfor %}
+            {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+  <div class="space"></div>
+  <!--scripts-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script>
+  $( document ).ready(function(){
+    $(".button-collapse").sideNav();
+    $('select').material_select();
+    $('#modal1').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '4%', // Ending top style attribute
+    }
+    );
+  })
+  alert(username);
+  console.log(username);
+  </script>
+  </body>
+</html>

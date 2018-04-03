@@ -1,0 +1,56 @@
+body{
+	margin: 0;
+	padding: 0;
+	color: #111;
+}
+a{
+	color: #111;
+}
+
+/* Nav Bar */
+nav{
+	background: transparent;
+}
+.right li a{
+	color: #00e676;
+}
+.nav-wrapper a{
+	color: #00e676;	
+}
+.sidenav li a{
+	color: #00e676;		
+}
+
+/* Swaaha Tabs */
+.swaaha-tab{
+	text-align: center;
+	border: 1px solid #00e676;
+	border-radius: 5px;
+}
+.swaaha-tab:hover{
+	background: #00e676;
+}
+.swaaha-tab-active{
+	background: #00e676;
+	text-align: center;
+	border: 1px solid #00e676;
+	border-radius: 5px;	
+}
+@media only screen and (max-width: 768px) {
+    .swaaha-tab-active {
+        padding: 15px 20px;
+    }
+}
+
+/* Download Buttons */
+.btn-swaaha{
+	margin-top: 5px;
+	background: #00e676;
+	color: #111;
+	border-radius: 5px;
+}
+.btn-swaaha:hover{
+	background: transparent;
+	color: #00e676;
+	border: 1px solid #00e676;
+}

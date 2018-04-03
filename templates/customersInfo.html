@@ -1,0 +1,136 @@
+{% if message %}
+  <script>
+    alert('{{ message }}');
+  </script>
+{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Customers</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+.space{
+  margin-top: 10vh;
+}
+</style>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+     <nav>
+       <div class="nav-wrapper green accent-4">
+          <a data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo center hide-on-large-only"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+          <a href="#" class="brand-logo left hide-on-med-and-down"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+         <ul class="right hide-on-med-and-down">
+           <li><a href="{% url 'logout' %}">Logout</a></li>
+         </ul>
+       </div>
+     </nav>
+   </div>
+   <ul id="slide-out" class="side-nav">
+     <li><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+  <div class="space"></div>
+  <div class="container">
+    <p class="green-text">Dashboard > Customers<p/>
+    <a class="waves-effect waves-light btn green accent-4 white-text modal-trigger" href="#modal1"><i class="material-icons left">add</i>Customer</a>
+    <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <!-- form for add-customer -->
+      <div class="row">
+      <form class="col s12" action="/addCustomer/" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="name" type="text" name="name" placeholder="Unique username" required>
+            <label for="name">Name</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="pswd" type="text" name="pswd" minlength="6" placeholder="Atleast 6 characters" required>
+            <label for="pswd">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input id="phone" type="tel" class="validate" name="phone" required maxlength="10" minlength="10">
+            <label for="phone">Phone</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="whatsapp" type="tel" class="validate" name="whatsapp" required maxlength="10" minlength="10">
+            <label for="whatsapp">WhatsApp</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select id="cluster" name="cluster">
+              {% for cluster in clusters %}
+                {% for key, value in cluster.items %}
+                  <option value="{{ key }}">{{ key }}</option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+            <label>Choose Cluster</label>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat ">Add Customer</button>
+    </div>
+      </form>
+  </div>
+    <table class="highlight table-responsive">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Cluster</th>
+              <th>Phone</th>
+              <th>WhatsApp</th>
+              <th>Profile</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for customer in customers %}
+            <tr>
+              <td>{{ customer.info.name }}</td>
+              <td>{{ customer.info.cluster }}</td>
+              <td>{{ customer.info.phone }}</td>
+              <td>{{ customer.info.whatsapp }}</td>
+              <td><a href="/updateCustomer/{{ customer.info.name }}" class="waves-effect waves-light btn green accent-4 white-text">Visit</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+
+  <div class="space"></div>
+  <!--scripts-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script>
+  $( document ).ready(function(){
+    $(".button-collapse").sideNav();
+    $('select').material_select();
+    $('#modal1').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '4%', // Ending top style attribute
+    }
+    );
+  })
+  </script>
+  </body>
+</html>

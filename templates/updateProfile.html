@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Customers</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+.space{
+  margin-top: 10vh;
+}
+</style>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+     <nav>
+       <div class="nav-wrapper green accent-4">
+          <a data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo center hide-on-large-only"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+          <a href="#" class="brand-logo left hide-on-med-and-down"><img src="http://www.swaaha.in/wp-content/uploads/2017/09/logo-png-1.png" alt="Swaaha Logo" class="responsive-img" width="200"></a>
+         <ul class="right hide-on-med-and-down">
+           <li><a href="{% url 'logout' %}">Logout</a></li>
+         </ul>
+       </div>
+     </nav>
+   </div>
+   <ul id="slide-out" class="side-nav">
+     <li><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+  <div class="space"></div>
+  <div class="container">
+    <p class="green-text">Dashboard > Customers > Update Profile<p/>
+      <a class="waves-effect waves-light btn green accent-4 white-text modal-trigger" href="#modal1">Update</a>
+      <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <!-- form for add-customer -->
+        <div class="row">
+        <form class="col s12" action="/addCustomerInfo/" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="name" type="text" name="name" value="{{ info.name }}" disabled>
+              <label for="name">Username</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="fullName" type="text" name="fullName" value="{{ info.fullName }}">
+              <label for="fullName">Full Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="dob" type="text" name="dob" value="{{ info.dob }}">
+              <label for="dob">DOB</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="gender" type="text" name="gender" value="{{ info.gender }}">
+              <label for="gender">Gender</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="marital" type="text" name="marital" value="{{ info.marital_status }}">
+              <label for="marital">Marital Status</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="phone" type="tel" name="phone" maxlength="10" minlength="10" value="{{ info.phone }}" >
+              <label for="phone">Phone</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="whatsapp" type="tel" name="whatsapp" maxlength="10" minlength="10" value="{{ info.whatsapp }}" >
+              <label for="whatsapp">WhatsApp</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <select name="blood">
+                <option value="" disabled selected>Choose Blood Group</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+              </select>
+              <label>Blood Group</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="motherName" type="text" name="motherName" value="{{ info.motherName }}">
+              <label for="motherName">Mother's Name</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="motherdob" type="text" name="motherdob" value="{{ info.motherdob }}">
+              <label for="motherdob">Mother's DOB</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <select name="motherblood">
+                <option value="" disabled selected>Choose Blood Group</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+              </select>
+              <label>Mother's Blood Group</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="resaddress" type="text" name="resaddress" value="{{ info.resaddress }}">
+              <label for="resaddress">Residential Address</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m4">
+              <input id="resdistrict" type="text" name="resdistrict" value="{{ info.resdistrict }}">
+              <label for="resdistrict">District</label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="resstate" type="text" name="resstate" value="{{ info.state }}">
+              <label for="resstate">State</label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="respin" type="text" maxlength="6" name="respin" value="{{ info.respin }}">
+              <label for="respin">PIN</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="peraddress" type="text" name="peraddress" value="{{ info.peraddress }}">
+              <label for="peraddress">Permanent Address</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m4">
+              <input id="perdistrict" type="text" name="perdistrict" value="{{ info.perdistrict }}">
+              <label for="perdistrict">District</label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="perstate" type="text" name="perstate" value="{{ info.perstate }}">
+              <label for="perstate">State</label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="perpin" type="text" maxlength="6" name="perpin" value="{{ info.perpin }}">
+              <label for="perpin">PIN</label>
+            </div>
+          </div>
+          <div class="row">
+            <h6>Educational Qualification</h6>
+          </div>
+          <!-- 8th -->
+          <div class="row">
+            <p>8th</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="8institution" type="text" name="8institution" value="{{ info.institution8 }}">
+              <label for="8institution">Institution</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="8board" type="text" name="8board" value="{{ info.board8 }}">
+              <label for="8board">Board</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="8year" type="text" name="8year" value="{{ info.year8 }}">
+              <label for="8year">Year</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="8percentage" type="text" name="8percentage" value="{{ info.percentage8 }}">
+              <label for="8percentage">Percentage</label>
+            </div>
+          </div>
+          <!-- 10th -->
+          <div class="row">
+            <p>10th</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="10institution" type="text" name="10institution" value="{{ info.institution10 }}">
+              <label for="10institution">Institution</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="10board" type="text" name="10board" value="{{ info.board10 }}">
+              <label for="10board">Board</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="10year" type="text" name="10year" value="{{ info.year10 }}">
+              <label for="10year">Year</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="10percentage" type="text" name="10percentage" value="{{ info.percentage10 }}">
+              <label for="10percentage">Percentage</label>
+            </div>
+          </div>
+          <!-- 12th -->
+          <div class="row">
+            <p>12th</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="12institution" type="text" name="12institution" value="{{ info.institution12 }}">
+              <label for="12institution">Institution</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="12board" type="text" name="12board" value="{{ info.board12 }}">
+              <label for="12board">Board</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="12year" type="text" name="12year" value="{{ info.year12 }}">
+              <label for="12year">Year</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="12percentage" type="text" name="12percentage" value="{{ info.percentage12 }}">
+              <label for="12percentage">Percentage</label>
+            </div>
+          </div>
+          <!-- Graduation -->
+          <div class="row">
+            <p>Graduation</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="gradinstitution" type="text" name="gradinstitution" value="{{ info.institutiongrad }}">
+              <label for="gradinstitution">Institution</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="graddegree" type="text" name="graddegree" value="{{ info.degreegrad }}">
+              <label for="graddegree">Degree</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="gradyear" type="text" name="gradyear" value="{{ info.yeargrad }}">
+              <label for="gradyear">Year</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="gradpercentage" type="text" name="gradpercentage" value="{{ info.percentagegrad }}">
+              <label for="gradpercentage">Percentage</label>
+            </div>
+          </div>
+          <!-- Post Graduation -->
+          <div class="row">
+            <p>Post Graduation</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="posgradinstitution" type="text" name="posgradinstitution" value="{{ info.institutionposgrad }}">
+              <label for="posgradinstitution">Institution</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="posgraddegree" type="text" name="posgraddegree" value="{{ info.degreeposgrad }}">
+              <label for="posgraddegree">Degree</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="posgradyear" type="text" name="posgradyear" value="{{ info.yearposgrad }}">
+              <label for="posgradyear">Year</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="posgradpercentage" type="text" name="posgradpercentage" value="{{ info.percentageposgrad }}">
+              <label for="posgradpercentage">Percentage</label>
+            </div>
+          </div>
+          <div class="row">
+            <h6>Identities Information</h6>
+          </div>
+          <!-- Adhaar Card-->
+          <div class="row">
+            <p>Adhaar Card</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="adhaarid" type="text" name="adhaarid" value="{{ info.adhaarid }}">
+              <label for="adhaarid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="adhaarvalid" type="text" name="adhaarvalid" value="{{ info.adhaarvalid }}">
+              <label for="adhaarvalid">Valid upto</label>
+            </div>
+          </div>
+          <!-- PAN Card-->
+          <div class="row">
+            <p>PAN Card</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6" value="{{ info.panid }}">
+              <input id="panid" type="text" name="panid">
+              <label for="panid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="panvalid" type="text" name="panvalid" value="{{ info.panvalid }}">
+              <label for="panvalid">Valid upto</label>
+            </div>
+          </div>
+          <!-- Voter ID-->
+          <div class="row">
+            <p>Voter Card</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="voterid" type="text" name="voterid" value="{{ info.voterid }}">
+              <label for="voterid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="votervalid" type="text" name="votervalid" value="{{ info.votervalid }}">
+              <label for="votervalid">Valid upto</label>
+            </div>
+          </div>
+          <!-- Drivng License-->
+          <div class="row">
+            <p>Driving License</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="drivingid" type="text" name="drivingid" value="{{ info.drivingid }}">
+              <label for="drivingid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="drivingvalid" type="text" name="drivingvalid" value="{{ info.drivingvalid }}">
+              <label for="drivingvalid">Valid upto</label>
+            </div>
+          </div>
+          <!-- Passport -->
+          <div class="row">
+            <p>Passport</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="passportid" type="text" name="passportid" value="{{ info.passportid }}">
+              <label for="passportid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="passportvalid" type="text" name="passportvalid" value="{{ info.passportvalid }}">
+              <label for="passportvalid">Valid upto</label>
+            </div>
+          </div>
+          <!-- Ration Card -->
+          <div class="row">
+            <p>Ration Card</p>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="rationid" type="text" name="rationid" value="{{ info.rationid }}">
+              <label for="rationid">ID No.</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="rationvalid" type="text" name="rationvalid" value="{{ info.rationvalid }}">
+              <label for="rationvalid">Valid upto</label>
+            </div>
+          </div>
+          <div class="row">
+            <h6>Bank Details</h6>
+          </div>
+          <div class="input-field col s12">
+            <input id="holdername" type="text" name="holdername" value="{{ info.holdername }}">
+            <label for="holdername">Account Holder Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="accnum" type="text" name="accnum" value="{{ info.accnum }}">
+            <label for="accnum">Account Number</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="bankname" type="text" name="bankname" value="{{ info.bankname }}">
+            <label for="bankname">Bank Name</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="ifsc" type="text" name="ifsc" value="{{ info.ifsc }}">
+            <label for="ifsc">IFSC</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="branch" type="text" name="branch" value="{{ info.branch }}">
+            <label for="branch">Branch</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="branchaddr" type="text" name="branchaddr" value="{{ info.branchaddr }}">
+            <label for="branchaddr">Branch Address</label>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat ">Update</button>
+      </div>
+        </form>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>Username:</strong>{{ info.name }}</p>
+      </div>
+      <div class="col s6 m6">
+        <p><strong>Full Name:</strong>{{ info.fullName }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>DOB:</strong>{{ info.dob }}</p>
+      </div>
+      <div class="col s6 m6">
+        <p><strong>Gender:</strong>{{ info.gender }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>Martial Status:</strong>{{ info.marital_status }}</p>
+      </div>
+      <div class="col s6 m6">
+        <p><strong>Phone:</strong>{{ info.phone }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>WhatsApp:</strong>{{ info.whatsapp }}</p>
+      </div>
+      <div class="col s6 m6">
+        <p><strong>Blood Group:</strong>{{ info.blood }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>Mother's Name:</strong>{{ info.motherName }}</p>
+      </div>
+      <div class="col s6 m6">
+        <p><strong>Mother's DOB</strong>{{ info.motherdob }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 m6">
+        <p><strong>Mother's Blood Group:</strong>{{ info.motherblood }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Residential</h5>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Address:</strong>{{ info.resaddress }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4">
+        <p><strong>District:</strong>{{ info.resdistrict }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>State:</strong>{{ info.resstate }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>PIN:</strong>{{ info.respin }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Permanent</h5>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Address:</strong>{{ info.peraddress }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4">
+        <p><strong>District:</strong>{{ info.perdistrict }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>State:</strong>{{ info.perstate }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>PIN:</strong>{{ info.perpin }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Educational Qualification</h5>
+    </div>
+    <div class="row">
+      <h6>8th</h6>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Institution: </strong>{{ info.institution8 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Board: </strong>{{ info.board8 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Year: </strong>{{ info.year8 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Percentage: </strong>{{ info.percentage8 }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h6>10th</h6>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Institution: </strong>{{ info.institution10 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Board: </strong>{{ info.board10 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Year: </strong>{{ info.year10 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Percentage: </strong>{{ info.percentage10 }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h6>12th</h6>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Institution: </strong>{{ info.institution12 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Board: </strong>{{ info.board12 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Year: </strong>{{ info.year12 }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Percentage: </strong>{{ info.percentage12 }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h6>Graduation</h6>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Institution: </strong>{{ info.institutiongrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Degree: </strong>{{ info.degreegrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Year: </strong>{{ info.yeargrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Percentage: </strong>{{ info.percentagegrad }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h6>Post Graduation</h6>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Institution: </strong>{{ info.institutionposgrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Degree: </strong>{{ info.degreeposgrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Year: </strong>{{ info.yearposgrad }}</p>
+      </div>
+      <div class="col s4">
+        <p><strong>Percentage: </strong>{{ info.percentageposgrad }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Identities</h5>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>Adhaar Number: </strong>{{ info.adhaarid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>Adhaar Validity: </strong>{{ info.adhaarvalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>PAN Number: </strong>{{ info.panid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>PAN Validity: </strong>{{ info.panvalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>Voter ID: </strong>{{ info.voterid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>Voter Validity: </strong>{{ info.votervalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>Driving License Number: </strong>{{ info.drivingid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>Driving License Validity: </strong>{{ info.drivingvalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>Passport Number: </strong>{{ info.passportid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>Passport Validity: </strong>{{ info.passportvalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <p><strong>Ration Card Number: </strong>{{ info.rationid }}</p>
+      </div>
+      <div class="col s12 m6">
+        <p><strong>Ration Card Validity: </strong>{{ info.rationvalid }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Bank Details</h5>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <p><strong>Bank Name: </strong>{{ info.bankname }}</p>
+      </div>
+      <div class="col s12">
+        <p><strong>Holder Name: </strong>{{ info.holdername }}</p>
+      </div>
+      <div class="col s12">
+        <p><strong>Account Number: </strong>{{ info.accnum }}</p>
+      </div>
+      <div class="col s12">
+        <p><strong>IFSC: </strong>{{ info.ifsc }}</p>
+      </div>
+      <div class="col s12">
+        <p><strong>Branch: </strong>{{ info.branch }}</p>
+      </div>
+      <div class="col s12">
+        <p><strong>Branch Address: </strong>{{ info.branchaddr }}</p>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="space"></div>
+    <!--scripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+    $( document ).ready(function(){
+      $(".button-collapse").sideNav();
+      $('select').material_select();
+      $('#modal1').modal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '4%', // Ending top style attribute
+      }
+      );
+    })
+    </script>
+    </body>
+  </html>

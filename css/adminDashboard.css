@@ -1,0 +1,27 @@
+body{
+	margin: 0;
+	padding: 0;
+	color: #111;
+}
+
+/* Nav Bar */
+nav{
+	background: transparent;
+}
+.right li a{
+	color: #00e676;
+}
+.nav-wrapper a{
+	color: #00e676;	
+}
+.sidenav li a{
+	color: #00e676;		
+}
+
+/* Cards */
+.card-action a{
+	color: #fff!important;
+}
+.card-action a:hover{
+	text-decoration: underline;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Error!</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      body, html{
+        margin: 0;
+      }
+      .content{
+        margin-top: 20vh;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h3 class="green-text">Unknown error! Please login again or check your connection.</h3>
+    </div>
+    <div class="container">
+      <a class="btn green accent-4 waves-effect" href="{% url 'login' %}">Login</a>
+    </div>
+  </body>
+</html>

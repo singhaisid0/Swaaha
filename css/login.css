@@ -1,0 +1,35 @@
+body{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+.login-panel{
+	margin-top: 50vh;
+	transform: translateY(-30vh);
+}
+.input-field input:focus + label {
+     color: #ace305!important;
+}
+.input-field .prefix.active {
+     color: #ace305!important;
+}
+.input-field input:focus {
+     border-bottom: 2px solid #ace305!important;
+}
+.btn-login{
+	background: #ace305;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+.btn-login:hover{
+	color: #ace305;
+	background: transparent;
+	border: 1px solid #ace305;
+}
+.login-panel .row a{
+	color: #747474;
+}
+.login-panel .row a:hover{
+	color: #ace305;
+}
